@@ -689,10 +689,10 @@
 }
 .profiles-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 2rem;
   justify-items: center;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
 }
 .profile-card {
   background: #f9f9f9;
@@ -774,5 +774,6 @@
     max-width: 340px;
   }
 }
+
 
 
