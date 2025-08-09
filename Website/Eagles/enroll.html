@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enroll | Eagles Academy and Adults Education</title>
+  <link rel="stylesheet" href="StyleSheet.css">
+  <link rel="icon" type="image/jpeg" href="../images/EAGLES LOGO.jpg">
+  <style>
+    .hidden { display: none; }
+    .validation-section { margin-bottom: 2rem; }
+    .validation-error { color: red; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div id="splash-screen">
+    <img src="../images/EAGLES LOGO.jpg" alt="Eagles Academy Logo" class="splash-logo">
+    <h1 class="splash-title">Eagles Academy</h1>
+  </div>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <span class="navbar-logo">Eagles Academy</span>
+      <ul class="navbar-menu">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#programs">Programs</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="enroll.html" class="active">Enroll</a></li>
+        <li><a href="signin.html">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="main">
+    <section class="enroll-section">
+      <h1 class="title">Enrollment Form</h1>
+      <!-- Serial Number & PIN Validation Section -->
+      <div class="validation-section" id="validation-section">
+        <form id="validation-form">
+          <div class="form-group">
+            <label for="serial">Serial Number</label>
+            <input type="text" id="serial" name="serial" required>
+          </div>
+          <div class="form-group">
+            <label for="pin">PIN</label>
+            <input type="password" id="pin" name="pin" required>
+          </div>
+          <button type="submit" class="enroll-button">Send</button>
+          <div class="validation-error" id="validation-error"></div>
+        </form>
+        <div style="margin-top: 1rem; text-align: center;">
+          <button type="button" class="enroll-button" onclick="window.location.href='buy-pin.html'">
+            Buy PIN & Serial Number
+          </button>
+          <p style="font-size: 0.95em; margin-top: 0.5rem;">Don't have a PIN and Serial Number? Click above to purchase.</p>
+        </div>
+      </div>
+      <!-- Enrollment Form (hidden until validation) -->
+      <form class="enroll-form hidden" id="enroll-form">
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="form-group">
+          <label for="program">Program</label>
+          <select id="program" name="program" required>
+            <option value="">Select a program</option>
+            <option value="basic">Basic Education (Primary to JHS)</option>
+            <option value="adult">Adult Literacy</option>
+            <option value="vocational">Vocational/Skills Training</option>
+            <option value="tutoring">After-School Tutoring</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contact">Contact Number</label>
+          <input type="tel" id="contact" name="contact" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="address">Home Address</label>
+          <input type="text" id="address" name="address">
+        </div>
+        <!-- Exam Date and Time Selection -->
+        <div class="form-group">
+          <label for="exam-date">Exam Date</label>
+          <input type="date" id="exam-date" name="exam-date" required>
+        </div>
+        <div class="form-group">
+          <label for="exam-time">Exam Time</label>
+          <select id="exam-time" name="exam-time" required>
+            <option value="">Select time</option>
+            <option value="08:00">8:00 AM</option>
+            <option value="09:00">9:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+          </select>
+        </div>
+        <button type="submit" class="enroll-button">Submit Application</button>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2025 Eagles Academy and Adults Education. All rights reserved.</p>
+      <p>
+        <a href="mailto:info@eaglesacademy.edu.gh">info@eaglesacademy.edu.gh</a> |
+        <a href="tel:+233200000000">+233 20 000 0000</a>
+      </p>
+    </div>
+  </footer>
+  <script>
+    // Simple validation logic (replace with real validation as needed)
+    document.getElementById('validation-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const serial = document.getElementById('serial').value.trim();
+      const pin = document.getElementById('pin').value.trim();
+      const errorDiv = document.getElementById('validation-error');
+      // Example: Accept if both fields are not empty (replace with real check)
+      if (serial && pin) {
+        document.getElementById('validation-section').classList.add('hidden');
+        document.getElementById('enroll-form').classList.remove('hidden');
+        errorDiv.textContent = '';
+      } else {
+        errorDiv.textContent = 'Invalid Serial Number or PIN. Please try again.';
+      }
+    });
+
+    // Splash animation logic
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('splash-screen').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('splash-screen').style.display = 'none';
+          document.querySelector('.navbar').style.display = '';
+          document.querySelector('.main').style.display = '';
+          document.querySelector('.footer').style.display = '';
+        }, 700);
+      }, 1800); // Show splash for 1.8 seconds
+    });
+  </script>
+</body>
+</html>

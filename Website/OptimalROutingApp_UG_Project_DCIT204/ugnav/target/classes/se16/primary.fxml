@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se16.PrimaryController">
+   <top>
+      <VBox>
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER" style="-fx-background-color: #2E3440; -fx-padding: 20;">
+               <children>
+                  <Label text="UG Navigate" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            
+            <!-- Route Planning Section -->
+            <VBox spacing="15.0" style="-fx-background-color: #ECEFF4; -fx-padding: 20;">
+               <children>
+                  <Label text="Plan Your Route" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                  
+                  <!-- Location Selection -->
+                  <HBox spacing="15.0" alignment="CENTER_LEFT">
+                     <children>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="From:" style="-fx-font-weight: bold;" />
+                              <ComboBox fx:id="sourceComboBox" prefWidth="200.0" promptText="Select source location" />
+                           </children>
+                        </VBox>
+                        
+                        <Button onAction="#handleSwapLocations" text="⇄" style="-fx-font-size: 16;" />
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="To:" style="-fx-font-weight: bold;" />
+                              <ComboBox fx:id="destinationComboBox" prefWidth="200.0" promptText="Select destination" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  
+                  <!-- Route Type Selection -->
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label text="Route Preference:" style="-fx-font-weight: bold;" />
+                        <HBox spacing="20.0">
+                           <children>
+                              <RadioButton fx:id="shortestRadio" text="Shortest Distance" />
+                              <RadioButton fx:id="fastestRadio" text="Fastest Time" />
+                              <RadioButton fx:id="landmarkRadio" text="Via Landmark:" />
+                              <ComboBox fx:id="landmarkTypeComboBox" prefWidth="150.0" disable="true" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Action Buttons -->
+                  <HBox spacing="10.0" alignment="CENTER_LEFT">
+                     <children>
+                        <Button fx:id="findRoutesButton" onAction="#handleFindRoutes" text="Find Routes" 
+                                style="-fx-background-color: #5E81AC; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;" />
+                        <Button onAction="#handleAlgorithmDemo" text="Algorithm Demo" 
+                                style="-fx-background-color: #A3BE8C; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <center>
+      <SplitPane dividerPositions="0.3, 0.7" orientation="HORIZONTAL">
+         <items>
+            <!-- Left Panel: Search and Routes -->
+            <VBox spacing="10.0">
+               <children>
+                  <!-- Search Section -->
+                  <VBox spacing="10.0" style="-fx-padding: 15;">
+                     <children>
+                        <Label text="Search Locations" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <TextField fx:id="searchField" promptText="Search locations..." HBox.hgrow="ALWAYS" />
+                              <Button onAction="#handleClearSearch" text="Clear" />
+                           </children>
+                        </HBox>
+                        <ListView fx:id="searchResultsList" prefHeight="150.0" />
+                     </children>
+                  </VBox>
+                  
+                  <Separator />
+                  
+                  <!-- Routes List -->
+                  <VBox spacing="10.0" style="-fx-padding: 15;" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Available Routes" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                        <ListView fx:id="routesListView" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            
+            <!-- Right Panel: Route Details -->
+            <VBox spacing="10.0" style="-fx-padding: 15;">
+               <children>
+                  <Label text="Route Details" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                  <TextArea fx:id="routeDetailsArea" wrapText="true" editable="false" VBox.vgrow="ALWAYS" 
+                           style="-fx-font-family: monospace;" />
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+   </center>
+   
+   <bottom>
+      <VBox>
+         <children>
+            <Separator />
+            <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 10; -fx-background-color: #D8DEE9;">
+               <children>
+                  <Label fx:id="statusLabel" text="Ready" style="-fx-font-size: 12;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
