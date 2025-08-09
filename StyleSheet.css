@@ -1,7 +1,7 @@
 .main {
   min-height: 100vh;
   background: linear-gradient(rgba(135,66,245,0.08), rgba(255,255,255,0.96)),
-    url("../images/1.jpg") no-repeat center center scroll;
+    url("images/1.jpg") no-repeat center center scroll;
   background-size: cover;
   color: #8742f5;
   padding: 2rem;
@@ -774,3 +774,4 @@
     max-width: 340px;
   }
 }
+
