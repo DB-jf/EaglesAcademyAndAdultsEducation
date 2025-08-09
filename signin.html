@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Eagles Academy</title>
+  <link rel="stylesheet" href="StyleSheet.css">
+  <link rel="icon" type="image/jpeg" href="../images/EAGLES LOGO.jpg">
+  <style>
+    .signin-section {
+      max-width: 400px;
+      margin: 3rem auto;
+      padding: 2rem 1.5rem;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .signin-title {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      color: #2d3e50;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    label {
+      font-size: 1.05rem;
+      color: #2d3e50;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      font-size: 1rem;
+      border: 1px solid #bfc9d1;
+      border-radius: 5px;
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
+      box-sizing: border-box;
+    }
+    .enroll-button {
+      width: 100%;
+      padding: 0.7rem;
+      font-size: 1.1rem;
+      background: #2d7be5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .enroll-button:hover {
+      background: #1b5fa7;
+    }
+    .signin-footer {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.97rem;
+    }
+    .signin-footer a {
+      color: #2d7be5;
+      text-decoration: none;
+    }
+    .signin-footer a:hover {
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <!-- Splash Animation -->
+  <div id="splash-screen">
+    <img src="../images/EAGLES LOGO.jpg" alt="Eagles Academy Logo" class="splash-logo">
+    <h1 class="splash-title">Eagles Academy</h1>
+  </div>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <img src="../images/EAGLES LOGO.jpg" alt="Eagles Academy Logo" class="navbar-logo-img">
+      <span class="navbar-logo">Eagles Academy</span>
+      <ul class="navbar-menu">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#programs">Programs</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="enroll.html">Enroll</a></li>
+        <li><a href="signin.html" class="active">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <section class="signin-section">
+      <h1 class="signin-title">Sign In</h1>
+      <!-- User Type Selection -->
+      <form id="user-type-form">
+        <div class="form-group">
+          <label for="user-type">Sign in as:</label>
+          <select id="user-type" name="user-type" required>
+            <option value="">-- Select User Type --</option>
+            <option value="student">Student</option>
+            <option value="staff">Staff</option>
+          </select>
+        </div>
+        <button type="submit" class="enroll-button">Continue</button>
+      </form>
+      <!-- Sign In Form (hidden by default) -->
+      <form id="signin-form" class="hidden">
+        <div class="form-group">
+          <label for="username">Username or Email</label>
+          <input type="text" id="username" name="username" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="enroll-button">Sign In</button>
+      </form>
+      <div class="signin-footer">
+        <p>Don't have an account? <a href="enroll.html">Register here</a></p>
+        <p><a href="#">Forgot password?</a></p>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2025 Eagles Academy and Adults Education. All rights reserved.</p>
+      <p>
+        <a href="mailto:info@eaglesacademy.edu.gh">info@eaglesacademy.edu.gh</a> |
+        <a href="tel:+233200000000">+233 20 000 0000</a>
+      </p>
+    </div>
+  </footer>
+  <script>
+    // Show sign in form after user type selection
+    document.getElementById('user-type-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if(document.getElementById('user-type').value) {
+        document.getElementById('user-type-form').classList.add('hidden');
+        document.getElementById('signin-form').classList.remove('hidden');
+      }
+    });
+    
+    // Splash animation logic
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('splash-screen').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('splash-screen').style.display = 'none';
+          document.querySelector('.navbar').style.display = '';
+          document.querySelector('.main').style.display = '';
+          document.querySelector('.footer').style.display = '';
+        }, 700);
+      }, 1800); // Show splash for 1.8 seconds
+    });
+
+  </script>
+</body>
+</html>
