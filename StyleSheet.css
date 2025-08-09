@@ -700,7 +700,7 @@
   box-shadow: 0 2px 8px rgba(135,66,245,0.08);
   padding: 1.5rem 1rem;
   width: 100%;
-  max-width: 220px;
+  max-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -774,4 +774,5 @@
     max-width: 340px;
   }
 }
+
 
