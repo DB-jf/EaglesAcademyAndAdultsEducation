@@ -1,0 +1,62 @@
+# Dependencies
+/backend/vendor/
+/frontend/node_modules/
+composer.lock
+package-lock.json
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs
+/frontend/dist/
+/frontend/build/
+/backend/build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Runtime cache
+.cache/
+.tmp/
+
+# PHP specific
+*.phar
+.phpunit.result.cache

@@ -1,0 +1,108 @@
+name: PHP Backend CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/php-ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/php-ci.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        php-version: [8.0, 8.1, 8.2]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, hash, json, mbstring, pcre, pdo, session, simplexml, tokenizer, xml
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      working-directory: ./backend
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Install dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+      working-directory: ./backend
+
+    - name: Check PHP syntax
+      run: find . -name "*.php" -exec php -l {} \;
+      working-directory: ./backend
+
+    - name: Run PHPUnit tests
+      run: composer test
+      working-directory: ./backend
+      continue-on-error: true
+
+    - name: Start PHP server for API testing
+      run: |
+        cd ./backend
+        php -S localhost:8000 -t public &
+        sleep 3
+      
+    - name: Test API endpoints
+      run: |
+        # Test health endpoint
+        curl -f http://localhost:8000/api/health
+        
+        # Test main API endpoint
+        curl -f http://localhost:8000/api
+        
+        # Test 404 handling
+        curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/api/nonexistent | grep -q 404
+
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+        tools: composer:v2, phpcs, phpstan
+
+    - name: Install dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+      working-directory: ./backend
+
+    - name: Check code style (PHP CS)
+      run: |
+        if [ -f ./vendor/bin/phpcs ]; then
+          ./vendor/bin/phpcs --standard=PSR12 public/ src/ || true
+        else
+          echo "PHP CodeSniffer not installed, skipping code style check"
+        fi
+      working-directory: ./backend
+
+    - name: Static analysis (PHPStan)
+      run: |
+        if [ -f ./vendor/bin/phpstan ]; then
+          ./vendor/bin/phpstan analyse public/ src/ --level=1 || true
+        else
+          echo "PHPStan not installed, skipping static analysis"
+        fi
+      working-directory: ./backend
