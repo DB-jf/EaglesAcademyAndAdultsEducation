@@ -313,6 +313,47 @@ img {
   margin: 0.5rem;
 }
 
+/* Image Mosaic Section */
+.image-mosaic {
+  padding: 2rem 0;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.mosaic-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns, can adjust */
+  grid-template-rows: repeat(2, 150px); /* 2 rows, can adjust */
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.mosaic-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.gallery-button {
+  margin-top: 1.5rem;
+}
+
+.btn-gallery {
+  background-color: #8742f5;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-gallery:hover {
+  background-color: #6a31c9;
+}
 /* ==========================
    About, Academics, Facilities
    ========================== */
