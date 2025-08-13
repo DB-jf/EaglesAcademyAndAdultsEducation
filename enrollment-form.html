@@ -1,30 +1,54 @@
+<!-- Navigation Bar from main page -->
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="navbar-container">
+    <div class="brand">
+      <a href="index.html" class="brand-link" aria-label="Eagles Academy Home">
+        <img src="images/EAGLES LOGO.jpg" alt="Eagles Academy logo" class="navbar-logo-img">
+        <span class="navbar-logo">Eagles Academy</span>
+      </a>
+    </div>
+
+    <button class="navbar-toggle" id="navbar-toggle" aria-expanded="false" aria-controls="navbar-menu" aria-label="Toggle menu">&#9776;</button>
+
+    <ul class="navbar-menu" id="navbar-menu">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
 <section class="application-form" id="application-form">
   <h2>Admission Application Form</h2>
-  <form id="multiStepForm">
 
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="step active">1</div>
+    <div class="step">2</div>
+    <div class="step">3</div>
+  </div>
+
+  <form id="multiStepForm">
     <!-- Step 1: Student Information -->
     <div class="form-step active">
       <fieldset>
         <legend>Student Information</legend>
-
         <label>Full Name <span class="required">*</span></label>
-        <input type="text" required>
+        <input type="text" name="fullname" required>
 
         <label>Date of Birth <span class="required">*</span></label>
-        <input type="date" required>
+        <input type="date" name="dob" required>
 
         <label>Gender <span class="required">*</span></label>
-        <select required>
+        <select name="gender" required>
           <option value="">Select Gender</option>
           <option>Male</option>
           <option>Female</option>
         </select>
 
         <label>Address <span class="required">*</span></label>
-        <textarea rows="3" required></textarea>
+        <textarea rows="3" name="address" required></textarea>
 
         <label>Passport Size Photograph <span class="required">*</span></label>
-        <input type="file" accept="image/*" required>
+        <input type="file" name="photo" accept="image/*" required>
       </fieldset>
     </div>
 
@@ -32,18 +56,17 @@
     <div class="form-step">
       <fieldset>
         <legend>Guardian Information</legend>
-
         <label>Guardian Name <span class="required">*</span></label>
-        <input type="text" required>
+        <input type="text" name="guardianName" required>
 
         <label>Relationship to Student <span class="required">*</span></label>
-        <input type="text" required>
+        <input type="text" name="relationship" required>
 
         <label>Guardian Phone <span class="required">*</span></label>
-        <input type="tel" required>
+        <input type="tel" name="guardianPhone" required>
 
         <label>Guardian Email</label>
-        <input type="email">
+        <input type="email" name="guardianEmail">
       </fieldset>
     </div>
 
@@ -53,7 +76,7 @@
         <legend>Declaration & Review</legend>
         <p>I hereby declare that all the information provided is true and correct to the best of my knowledge.</p>
         <label>
-          <input type="checkbox" required> I agree to the terms and conditions <span class="required">*</span>
+          <input type="checkbox" name="agree" required> I agree to the terms and conditions <span class="required">*</span>
         </label>
       </fieldset>
     </div>
@@ -63,76 +86,53 @@
       <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
       <button type="button" id="nextBtn" onclick="nextPrev(1)">Save & Next</button>
     </div>
-
   </form>
 </section>
 
 <style>
-.application-form {
-  background: #fff;
-  border-radius: 1rem;
-  max-width: 700px;
-  margin: auto;
-  padding: 2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+/* === Navbar from main page === */
+.navbar { color: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid #8742f5; backdrop-filter: brightness(0.7);}
+.navbar-container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 1rem;}
+.brand-link { display: flex; align-items: center; text-decoration: none;}
+.navbar-logo { font-weight: bold; font-size: 1.3rem; letter-spacing: 1px; color: #fff; margin-left: 0.5rem;}
+.navbar-logo-img { height: 50px; width: 50px; border-radius: 50%; background: #fff; border: 2px solid #8742f5; box-shadow: 0 1px 4px rgba(135,66,245,0.10);}
+.navbar-menu { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;}
+.navbar-menu li a { color: #fff; text-decoration: none; font-weight: 500; font-size: 1rem; padding: 0.3rem 0.7rem; border-radius: 4px; transition: background 0.2s, color 0.2s;}
+.navbar-menu li a:hover { background: #fff; color: #8742f5;}
+.navbar-toggle { display: none; background: none; border: none; font-size: 2rem; color: #fff; cursor: pointer;}
+@media (max-width: 700px) {
+  .navbar-menu { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.85); position: absolute; top: 100%; left: 0; padding: 1rem 0; border-radius: 0 0 1rem 1rem;}
+  .navbar-menu.active { display: flex;}
+  .navbar-toggle { display: block;}
 }
-.application-form h2 {
-  text-align: center;
-  color: #8742f5;
-  margin-bottom: 2rem;
-}
-fieldset {
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-legend {
-  font-weight: bold;
-  color: #8742f5;
-}
-label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: 500;
-}
-.required {
-  color: red;
-  font-weight: bold;
-}
-input, select, textarea {
-  width: 100%;
-  padding: 0.7rem;
-  margin-top: 0.3rem;
-  border-radius: 0.4rem;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-.form-step {
-  display: none;
-}
-.form-step.active {
-  display: block;
-}
-.form-navigation {
-  display: flex;
-  justify-content: space-between;
-}
-.form-navigation button {
-  background: #8742f5;
-  color: #fff;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.form-navigation button:hover {
-  background: #6d2ed9;
-}
+
+/* === Form styling === */
+.application-form { background: #fff; border-radius: 1rem; max-width: 700px; margin: 2rem auto; padding: 2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.08);}
+.application-form h2 { text-align: center; color: #8742f5; margin-bottom: 2rem;}
+fieldset { border: 1px solid #ddd; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem;}
+legend { font-weight: bold; color: #8742f5;}
+label { display: block; margin-top: 1rem; font-weight: 500;}
+.required { color: red; font-weight: bold;}
+input, select, textarea { width: 100%; padding: 0.7rem; margin-top: 0.3rem; border-radius: 0.4rem; border: 1px solid #ccc; font-size: 1rem;}
+.form-step { display: none;}
+.form-step.active { display: block;}
+.form-navigation { display: flex; justify-content: space-between;}
+.form-navigation button { background: #8742f5; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem;}
+.form-navigation button:hover { background: #6d2ed9;}
+
+/* === Progress bar === */
+.progress-bar { display: flex; justify-content: space-between; margin-bottom: 1rem;}
+.progress-bar .step { width: 30px; height: 30px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold;}
+.progress-bar .step.active { background: #8742f5;}
 </style>
 
 <script>
+// Navbar toggle for mobile
+document.getElementById("navbar-toggle").addEventListener("click", function(){
+  document.getElementById("navbar-menu").classList.toggle("active");
+  this.setAttribute("aria-expanded", this.getAttribute("aria-expanded") === "true" ? "false" : "true");
+});
+
 let currentStep = 0;
 showStep(currentStep);
 
@@ -142,17 +142,37 @@ function showStep(n) {
 
   document.getElementById("prevBtn").style.display = n === 0 ? "none" : "inline-block";
   document.getElementById("nextBtn").innerHTML = (n === steps.length - 1) ? "Submit" : "Save & Next";
+
+  updateProgressBar(n);
 }
 
 function nextPrev(n) {
   let steps = document.getElementsByClassName("form-step");
+  // Validate before going next
+  if (n === 1) {
+    let inputs = steps[currentStep].querySelectorAll("input, select, textarea");
+    for (let input of inputs) {
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        return false;
+      }
+    }
+  }
+
   steps[currentStep].classList.remove("active");
-  currentStep = currentStep + n;
+  currentStep += n;
 
   if (currentStep >= steps.length) {
     document.getElementById("multiStepForm").submit();
     return;
   }
   showStep(currentStep);
+}
+
+function updateProgressBar(n) {
+  let progressSteps = document.querySelectorAll(".progress-bar .step");
+  progressSteps.forEach((step, index) => {
+    step.classList.toggle("active", index <= n);
+  });
 }
 </script>
