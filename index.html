@@ -57,7 +57,7 @@
         <p class="hero-sub">A modern learning environment where excellence, character and leadership are nurtured.</p>
 
         <div class="hero-ctas">
-          <a href="apply.html" class="btn btn-primary animated-btn" id="apply-cta">Apply Now — Purchase PIN</a>
+          <a href="apply-now.html" class="btn btn-primary animated-btn" id="apply-cta">Apply Now — Purchase PIN</a>
           <a href="#about" class="btn btn-outline animated-btn">Learn More</a>
         </div>
       </div>
@@ -135,16 +135,16 @@
   <!-- Row 1 -->
   <div class="team-row top-row">
     <div class="team-member large-card">
-      <img src="images/avatar-w.jpg" alt="Proprietor" class="team-photo">
+      <img src="images/Proprietor.jpg" alt="Proprietor" class="team-photo">
       <div class="team-info">
         <h3 class="team-name">Madam Lydia Awekia</h3>
         <p class="team-role">Proprietor</p>
       </div>
     </div>
     <div class="team-member large-card">
-      <img src="images/male-avatar.jpg" alt="Director" class="team-photo">
+      <img src="images/Director.jpg" alt="Director" class="team-photo">
       <div class="team-info">
-        <h3 class="team-name">Mr. John Doe</h3>
+        <h3 class="team-name">Mr. Isreal</h3>
         <p class="team-role">Director</p>
       </div>
     </div>
@@ -194,17 +194,33 @@
     <div class="team-member">
       <img src="images/male-avatar.jpg" alt="Student Counsellor" class="team-photo">
       <div class="team-info">
-        <h3 class="team-name">Mr. Kwame Nkrumah</h3>
+        <h3 class="team-name">Mr. Isaac</h3>
         <p class="team-role">Student Counsellor</p>
       </div>
     </div>
     <div class="team-member">
-      <img src="images/male-avatar.jpg" alt="PTA Chairperson" class="team-photo">
+      <img src="images/PTA chairman.jpg" alt="PTA Chairperson" class="team-photo">
       <div class="team-info">
-        <h3 class="team-name">Mr. George Edwards</h3>
+        <h3 class="team-name">Mr. Laar Jonas Yenuban</h3>
         <p class="team-role">PTA Chairperson</p>
       </div>
     </div>
+  </div>
+</section>
+  <!-- Dynamic Mosaic Section -->
+<section class="image-mosaic">
+  <div class="mosaic-container">
+    <img src="images/1.jpg" alt="Gallery Image 1">
+    <img src="images/2.jpg" alt="Gallery Image 2">
+    <img src="images/3.jpg" alt="Gallery Image 3">
+    <img src="images/4.jpg" alt="Gallery Image 4">
+    <img src="images/5.jpg" alt="Gallery Image 5">
+    <img src="images/1.jpg" alt="Gallery Image 6">
+    <img src="images/2.jpg" alt="Gallery Image 7">
+    <img src="images/3.jpg" alt="Gallery Image 8">
+  </div>
+  <div class="gallery-button">
+    <a href="gallery.html" class="btn btn-gallery">View Gallery</a>
   </div>
 </section>
 
@@ -299,6 +315,25 @@
             }
           });
         });
+ // Random Image Rotation
+ const mosaicContainer = document.querySelector('.mosaic-container');
+const images = Array.from(mosaicContainer.querySelectorAll('img'));
+const imageSources = images.map(img => img.src);
+
+function shuffleImages() {
+  // pick two random indices
+  const idx1 = Math.floor(Math.random() * images.length);
+  let idx2 = Math.floor(Math.random() * images.length);
+  while(idx2 === idx1) idx2 = Math.floor(Math.random() * images.length);
+
+  // swap src
+  const temp = images[idx1].src;
+  images[idx1].src = images[idx2].src;
+  images[idx2].src = temp;
+}
+
+// Shuffle every 1 seconds
+setInterval(shuffleImages, 1000);
 
         // Contact form (front-end only)
         var contactForm = document.getElementById('contact-form');
