@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Eagles Academy</title>
+  <link rel="stylesheet" href="StyleSheet.css">
+  <link rel="icon" type="image/jpeg" href="images/EAGLES LOGO.jpg">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .gallery-header { padding: 2rem; text-align: center; background: #f5f5f5; }
+    .gallery-header h1 { color: #8742f5; }
+    
+    .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+    .filters input, .filters select { padding: 0.5rem 1rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 5px; max-width: 1200px; margin: auto; }
+
+    .gallery-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; transition: transform 0.3s; }
+    .gallery-grid img:hover { transform: scale(1.05); }
+
+    .no-results { text-align: center; color: #999; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <img src="images/EAGLES LOGO.jpg" alt="Eagles Academy logo" class="navbar-logo-img">
+          <span class="navbar-logo">Eagles Academy</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="gallery-header">
+    <h1>Gallery</h1>
+  </section>
+
+  <!-- Filters -->
+  <section class="filters">
+    <input type="text" id="searchBar" placeholder="Search images...">
+    
+    <select id="yearFilter">
+      <option value="">Select Year</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+    </select>
+
+    <select id="eventFilter">
+      <option value="">Select Event</option>
+      <option value="Graduation">Graduation</option>
+      <option value="Inter-sch Games">Inter-school Games</option>
+      <option value="Anniversary">Anniversary</option>
+      <option value="Graduation">Graduation</option>
+      <option value="Quiz Competition">Quiz Competition</option>
+    </select>
+
+    <select id="classFilter">
+      <option value="">Select Class</option>
+      <option value="Crech">Crech</option>
+      <option value="KG">KG</option>
+      <option value="Primary 1">Primary 1</option>
+      <option value="Primary 2">Primary 2</option>
+      <option value="Primary 3">Primary 3</option>
+      <option value="Primary 4">Primary 4</option>
+      <option value="Primary 5">Primary 5</option>
+      <option value="Primary 6">Primary 6</option>
+      <option value="JHS 1">JHS 1</option>
+      <option value="JHS 2">JHS 2</option>
+      <option value="JHS 3">JHS 3</option>
+    </select>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="gallery-grid" id="galleryGrid">
+    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
+    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
+    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
+    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
+    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
+    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
+    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
+    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
+    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
+    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
+    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
+    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
+    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
+    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
+    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
+    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
+    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
+    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
+    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
+    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
+    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
+    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
+    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
+    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
+    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
+    <!-- Add more images similarly -->
+  </section>
+
+  <p class="no-results" id="noResults" style="display:none;">No images found.</p>
+
+<script>
+const gallery = document.getElementById('galleryGrid');
+const searchBar = document.getElementById('searchBar');
+const yearFilter = document.getElementById('yearFilter');
+const eventFilter = document.getElementById('eventFilter');
+const classFilter = document.getElementById('classFilter');
+const noResults = document.getElementById('noResults');
+
+// Randomize images on page load
+function shuffleImages() {
+  const images = Array.from(gallery.querySelectorAll('img'));
+  for (let i = images.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    gallery.appendChild(images[j]);
+    images.splice(j, 1);
+  }
+}
+
+window.addEventListener('load', () => {
+  shuffleImages();
+  filterGallery();
+});
+
+[yearFilter, eventFilter, classFilter, searchBar].forEach(el => {
+  el.addEventListener('input', filterGallery);
+});
+
+function filterGallery() {
+  const searchText = searchBar.value.toLowerCase();
+  const selectedYear = yearFilter.value;
+  const selectedEvent = eventFilter.value;
+  const selectedClass = classFilter.value;
+
+  let visibleCount = 0;
+
+  gallery.querySelectorAll('img').forEach(img => {
+    const matchesSearch = img.alt.toLowerCase().includes(searchText);
+    const matchesYear = !selectedYear || img.dataset.year === selectedYear;
+    const matchesEvent = !selectedEvent || img.dataset.event === selectedEvent;
+    const matchesClass = !selectedClass || img.dataset.class === selectedClass;
+
+    if(matchesSearch && matchesYear && matchesEvent && matchesClass){
+      img.style.display = 'block';
+      visibleCount++;
+    } else {
+      img.style.display = 'none';
+    }
+  });
+
+  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+</script>
+
+</body>
+</html>
