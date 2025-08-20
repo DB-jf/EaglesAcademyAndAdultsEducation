@@ -38,32 +38,20 @@
       <ul class="navbar-menu" id="navbar-menu">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About Us</a></li>
-        <li><a href="#academics">Academics</a></li>
-        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#news">News</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="apply-now.html" class="btn btn-apply">Apply Now</a></li>
+        <li><a href="enroll.html">Enroll</a></li>
+        <li><a href="signin.html">Sign In</a></li>
       </ul>
     </div>
   </nav>
-
-  <!-- Main single-page content -->
-  <main id="main" class="main" style="display:none;">
-
-    <!-- HERO / HOME -->
-    <header id="home" class="hero section" role="region" aria-label="Home">
-      <div class="container hero-inner">
-        <p class="eyebrow">Welcome to</p>
-        <h2 class="hero-title">Eagles Academy &amp; Adults Education</h2>
-        <p class="hero-sub">A modern learning environment where excellence, character and leadership are nurtured.</p>
-
-        <div class="hero-ctas">
-          <a href="apply-now.html" class="btn btn-primary animated-btn" id="apply-cta">Apply Now — Purchase PIN</a>
-          <a href="#about" class="btn btn-outline animated-btn">Learn More</a>
-        </div>
-      </div>
-
-      <!-- Decorative hero image area (replace in CSS with background-image or an <img>) -->
-      <div class="hero-visual" aria-hidden="true"></div>
+  <main class="main" id="home" style="display:none;">
+    <header class="header">
+      <h1 class="title">Eagles Academy and Adults Education</h1>
+      <p class="subtitle">
+        Located in Kyeremankoma, Kintampo - Bono East Region, Ghana
+      </p>
     </header>
 
     <!-- ABOUT -->
@@ -274,112 +262,44 @@
 
   <!-- Lightweight JS to power splash, mobile menu and contact form UI -->
   <script>
-    (function() {
-      // Show splash then reveal site
-      document.addEventListener('DOMContentLoaded', function() {
-        var splash = document.getElementById('splash-screen');
-        var nav = document.querySelector('.navbar');
-        var main = document.querySelector('.main');
-        var footer = document.querySelector('.footer');
-
-        // keep splash visible for 1.8s then fade
-        setTimeout(function() {
-          splash.style.opacity = '0';
-          splash.setAttribute('aria-hidden', 'true');
-          setTimeout(function() {
-            splash.style.display = 'none';
-            nav.style.display = '';
-            main.style.display = '';
-            footer.style.display = '';
-            // ensure focus lands on the main content for keyboard users
-            document.getElementById('main').focus();
-          }, 700);
-        }, 1800);
-
-        // Navbar toggle
-        var toggle = document.getElementById('navbar-toggle');
-        var menu = document.getElementById('navbar-menu');
-        toggle.addEventListener('click', function() {
-          var expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          menu.classList.toggle('active');
-        });
-
-        // Close mobile menu when a nav link is clicked
-        var navLinks = menu.querySelectorAll('a[href^="#"]');
-        navLinks.forEach(function(link) {
-          link.addEventListener('click', function() {
-            if (menu.classList.contains('active')) {
-              menu.classList.remove('active');
-              toggle.setAttribute('aria-expanded', 'false');
-            }
-          });
-        });
- // Random Image Rotation
- const mosaicContainer = document.querySelector('.mosaic-container');
-const images = Array.from(mosaicContainer.querySelectorAll('img'));
-const imageSources = images.map(img => img.src);
-
-function shuffleImages() {
-  // pick two random indices
-  const idx1 = Math.floor(Math.random() * images.length);
-  let idx2 = Math.floor(Math.random() * images.length);
-  while(idx2 === idx1) idx2 = Math.floor(Math.random() * images.length);
-
-  // swap src
-  const temp = images[idx1].src;
-  images[idx1].src = images[idx2].src;
-  images[idx2].src = temp;
-}
-
-// Shuffle every 1 seconds
-setInterval(shuffleImages, 1000);
-
-        // Contact form (front-end only)
-        var contactForm = document.getElementById('contact-form');
-        var feedback = document.getElementById('contact-feedback');
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          // Basic validation
-          var name = document.getElementById('cf-name').value.trim();
-          var email = document.getElementById('cf-email').value.trim();
-          var message = document.getElementById('cf-message').value.trim();
-          if (!name || !email || !message) {
-            feedback.textContent = 'Please complete all fields before sending.';
-            return;
-          }
-          // Simulate sending
-          feedback.textContent = 'Sending message...';
-          setTimeout(function() {
-            feedback.textContent = 'Thanks — your message has been received. We will respond within 2 business days.';
-            contactForm.reset();
-          }, 900);
-        });
-
-        // Update footer year
-        document.getElementById('year').textContent = new Date().getFullYear();
+    // Simple slider functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
       });
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+    // Auto-slide every 5 seconds
+    setInterval(nextSlide, 5000);
+    // Initialize
+    showSlide(currentSlide);
 
-      // Optional: smooth scroll behaviour for browsers that do not support CSS smooth scrolling
-      // (Modern browsers will use CSS `scroll-behavior: smooth` in the stylesheet.)
-      function smoothScrollPolyfill() {
-        // Only run if browser doesn't support scrollBehavior
-        if ('scrollBehavior' in document.documentElement.style) return;
-        var links = document.querySelectorAll('a[href^="#"]');
-        links.forEach(function(link) {
-          link.addEventListener('click', function(e) {
-            var targetId = this.getAttribute('href').slice(1);
-            var target = document.getElementById(targetId);
-            if (target) {
-              e.preventDefault();
-              var top = target.getBoundingClientRect().top + window.pageYOffset - 60; // header offset
-              window.scrollTo({ top: top, behavior: 'smooth' });
-            }
-          });
-        });
-      }
-      smoothScrollPolyfill();
-    })();
+    // Splash animation logic
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('splash-screen').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('splash-screen').style.display = 'none';
+          document.querySelector('.navbar').style.display = '';
+          document.querySelector('.main').style.display = '';
+          document.querySelector('.footer').style.display = '';
+        }, 700);
+      }, 1800); // Show splash for 1.8 seconds
+    });
+
+    // Hamburger menu toggle
+    document.getElementById('navbar-toggle').onclick = function() {
+      document.getElementById('navbar-menu').classList.toggle('active');
+    };
   </script>
 
 </body>
