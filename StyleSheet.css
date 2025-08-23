@@ -507,6 +507,11 @@ img {
 /* ==========================
    Contact Section
    ========================== */
+.contact{
+   background-image: url('images/contact\ us\ bg.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+}
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
