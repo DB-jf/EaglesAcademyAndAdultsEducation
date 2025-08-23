@@ -471,16 +471,21 @@ img {
 .facility-text {
   flex: 1;
 }
+
 .about h4,
-.academics h4,
-.facility-text h4 {
-  font-size: 1.5rem;
+.academics h4{
+  font-size: 1rem;
   margin-bottom: 15px;
   color: #7700ff;
 }
-
+  
+.facility-text h4{
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #7700ff;
+}
 .facility-text p {
-  font-size: 1rem;
+  font-size: 1.4rem;
   line-height: 1.6;
   color: #555;
 }
