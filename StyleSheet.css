@@ -66,6 +66,20 @@ img {
 .btn-primary:hover,
 .btn-outline:hover {
   opacity: 0.9;
+  background-color: #d3d3f0;
+  color:#c300ff;
+  border: 2px solid #ab7af5;
+}
+
+/* Apply Button */
+.btn-apply {
+  background-color: #8742f5;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .animated-btn {
@@ -153,7 +167,9 @@ img {
       transition: background 0.3s ease;
     }
     .pay-btn:hover {
-      background: #6a31c2;
+      background-color: #d3d3f0;
+      color:#c300ff;
+      border: 2px solid #ab7af5;
     }
     /* PIN Form */
     .pin-form {
@@ -183,12 +199,24 @@ img {
    Navbar with background image
    ========================== */
 .navbar {
-  color: #fff;
+  color: #000000;
   position: sticky;
   top: 0;
-  z-index: 100;
-  border-bottom: 2px solid #8742f5;
-  backdrop-filter: brightness(0.7);
+  z-index: 1000;
+  
+  background-color: white;
+}
+
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;  /* thickness of progress bar */
+  width: 0%;    /* start empty */
+  background-color: #8742f5; /* your purple */
+  transition: width 0.1s linear;
 }
 
 .navbar-container {
@@ -210,7 +238,7 @@ img {
   font-weight: bold;
   font-size: 1.3rem;
   letter-spacing: 1px;
-  color: #fff;
+  color: #070707;
   margin-left: 0.5rem;
 }
 
@@ -232,7 +260,7 @@ img {
 }
 
 .navbar-menu li a {
-  color: #fff;
+  color: #000000;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
@@ -273,7 +301,22 @@ img {
   .navbar-toggle {
     display: block;
   }
+ .navbar-menu li a.active {
+  background: #8742f5;
+  color: #fff !important;
 }
+}
+#scroll-progress {
+  position: fixed;
+  top: 60px; /* Adjust based on navbar height */
+  left: 0;
+  height: 4px;
+  background: linear-gradient(to right, #ff6600, #ae00ff);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.25s ease-out;
+}
+
 
 /* ==========================
    Hero Section
@@ -352,7 +395,9 @@ img {
 }
 
 .btn-gallery:hover {
-  background-color: #6a31c9;
+  background-color: #d3d3f0;
+  color:#c300ff;
+  border: 2px solid #ab7af5;
 }
 /* ==========================
    About, Academics, Facilities
@@ -487,14 +532,14 @@ img {
    ========================== */
 .footer {
   background: rgba(0, 0, 0, 0.2);
-  color: #fff;
+  color: #000000;
   text-align: center;
   padding: 1.2rem 0;
   border-top: 2px solid #8742f5;
 }
 
 .footer a {
-  color: #fff;
+  color: #000000;
   text-decoration: underline;
 }
 
