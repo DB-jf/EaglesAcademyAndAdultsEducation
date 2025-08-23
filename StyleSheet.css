@@ -275,10 +275,11 @@ img {
   transition: background 0.2s, color 0.2s;
 }
 
-.navbar-menu li a:hover {
-  font-size: 17px;
-  color: #965cf3;
+.navbar-menu li:hover {
+  border-bottom: 2px solid#8742f5;
+  color: #8742f5;
 }
+
 
 .navbar-toggle {
   display: none;
