@@ -471,11 +471,12 @@ img {
 .facility-text {
   flex: 1;
 }
-
+.about h4,
+.academics h4,
 .facility-text h4 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #222;
+  color: #7700ff;
 }
 
 .facility-text p {
@@ -597,15 +598,14 @@ img {
    Footer
    ========================== */
 .footer {
-  background: rgba(0, 0, 0, 0.2);
-  color: #000000;
+  background: rgb(129, 42, 179);
+  color: #ffffff;
   text-align: center;
-  padding: 1.2rem 0;
-  border-top: 2px solid #8742f5;
+  padding: 0.1rem 0;
 }
 
 .footer a {
-  color: #000000;
+  color: #ffffff;
   text-decoration: underline;
 }
 
