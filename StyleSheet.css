@@ -281,16 +281,19 @@ img {
   background: none;
   border: none;
   font-size: 2rem;
-  color: #fff;
+  color: #9f26e6;
   cursor: pointer;
 }
 
 @media (max-width: 700px) {
+  .navbar-toggle {
+    display: block;
+  }
   .navbar-menu {
     display: none;
     flex-direction: column;
     width: 100%;
-    background: rgba(0,0,0,0.85);
+    background: rgba(255, 255, 255, 0.85);
     position: absolute;
     top: 100%;
     left: 0;
@@ -300,9 +303,7 @@ img {
   .navbar-menu.active {
     display: flex;
   }
-  .navbar-toggle {
-    display: block;
-  }
+  
  .navbar-menu li a.active {
   background: #8742f5;
   color: #fff !important;
