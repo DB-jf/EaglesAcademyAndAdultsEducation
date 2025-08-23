@@ -81,7 +81,11 @@ img {
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
-
+.btn-apply:hover {
+  background-color: #000000;
+  color:#ffffff;
+  border: 2px solid #6600ff;
+}
 .animated-btn {
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -304,10 +308,6 @@ img {
     display: flex;
   }
   
- .navbar-menu li a.active {
-  background: #8742f5;
-  color: #fff !important;
-}
 }
 #scroll-progress {
   position: fixed;
