@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login - Eagles Applications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <img src="images/EAGLES LOGO.jpg" alt="Eagles Logo" class="splash-logo">
+    <h1 class="splash-title">Eagles Admin</h1>
+  </div>
+
+  <!-- Login Container -->
+  <div class="login-container">
+    <div class="login-card animated-card">
+      <div class="login-header">
+        <img src="images/EAGLES LOGO.jpg" alt="Eagles Logo" class="login-logo">
+        <h2>Admin Login</h2>
+        <p>Sign in to manage student applications</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Email / Username</label>
+          <input type="text" id="username" name="username" required placeholder="Enter your email or username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+        <div class="form-options">
+          <label>
+            <input type="checkbox" id="remember"> Remember me
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn-primary animated-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Splash screen fade out
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("splash-screen").style.opacity = "0";
+        setTimeout(() => document.getElementById("splash-screen").style.display = "none", 700);
+      }, 1200);
+    });
+
+    // Handle login
+    document.getElementById("login-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username === "admin" && password === "1234") {
+        window.location.href = "admin.html"; // Redirect to dashboard
+      } else {
+        alert("Invalid credentials! Try admin / 1234.");
+      }
+    });
+  </script>
+
+</body>
+</html>
