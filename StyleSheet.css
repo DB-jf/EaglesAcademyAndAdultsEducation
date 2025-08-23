@@ -363,7 +363,7 @@ img {
 /* Image Mosaic Section */
 .image-mosaic {
   padding: 2rem 0;
-  background: #f9f9f9;
+  background: #b4b3b4;
   text-align: center;
 }
 
@@ -406,6 +406,10 @@ img {
 /* ==========================
    About, Academics, Facilities
    ========================== */
+.about{
+  opacity: 0.95;
+   background-color: rgba(245, 245, 245, 0.788);
+}
 .academics{
   background-image: url('images/academics.jpg');
   background-size: cover;
