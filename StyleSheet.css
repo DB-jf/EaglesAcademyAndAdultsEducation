@@ -137,6 +137,13 @@ img {
       font-size: 3rem;
       z-index: 1;
     }
+    .eyebrow{
+      color: #ffffff;
+      font-size: 24px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
     
 /* ==========================
    Navbar with background image
