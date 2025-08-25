@@ -31,7 +31,7 @@ img {
 .section-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #8742f5;
+  color: #860397;
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -52,15 +52,15 @@ img {
 }
 
 .btn-primary {
-  background-color: #8742f5;
+  background-color: #730594;
   color: #fff;
   border: none;
 }
 
 .btn-outline {
   background-color: transparent;
-  border: 2px solid #8742f5;
-  color: #8742f5;
+  border: 2px solid #730594;
+  color: #ffffff;
 }
 
 .btn-primary:hover,
@@ -68,22 +68,35 @@ img {
   opacity: 0.9;
   background-color: #d3d3f0;
   color:#ffffff;
-  border: 2px solid #ab7af5;
+  border: 2px solid #ffffff;
 }
 
 /* Apply Button */
+.nav-buttons {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-buttons li a {
+  text-decoration: none;
+  color: #ffffff;
+  list-style: none;
+}
 .btn-apply {
-  background-color: #8742f5;
-  color: #fff;
+  border-radius: 0px;
+  background-color: #730594;
   border: none;
-  padding: 0.8rem 1.5rem;
+  padding: 0.6rem 1.2rem;
   font-weight: bold;
   transition: background-color 0.4s ease;
 }
 .btn-apply:hover {
   background-color: #f6dcfd;
   color:#000000;
-  border-radius: 0%;
+  border-radius: 10px;
 }
 .animated-btn {
   transition: transform 0.2s, box-shadow 0.2s;
@@ -91,7 +104,7 @@ img {
 
 .animated-btn:active {
   transform: scale(0.96);
-  box-shadow: 0 2px 12px #8742f5;
+  box-shadow: 0 2px 12px #730594;
 }
 
 .animated-card {
@@ -124,80 +137,7 @@ img {
       font-size: 3rem;
       z-index: 1;
     }
-    /* Steps */
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      padding: 3rem 2rem;
-      background: #f9f9ff;
-    }
-    .step {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      padding: 2rem;
-      max-width: 300px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .step:hover {
-      transform: translateY(-6px);
-    }
-    .step h3 {
-      color: #8742f5;
-      margin-bottom: 0.5rem;
-    }
-    /* Payment Section */
-    .payment-section {
-      padding: 3rem 2rem;
-      text-align: center;
-      background: linear-gradient(135deg, #eef1f5, #f9f9ff);
-    }
-    .payment-section h2 {
-      color: #222;
-      margin-bottom: 1rem;
-    }
-    .pay-btn {
-      background: #8742f5;
-      color: white;
-      border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s ease;
-    }
-    .pay-btn:hover {
-      background-color: #d3d3f0;
-      color:#c300ff;
-      border: 2px solid #ab7af5;
-    }
-    /* PIN Form */
-    .pin-form {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-    .pin-form input {
-      padding: 0.8rem;
-      margin: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      width: 250px;
-    }
-    .pin-form button {
-      padding: 0.8rem 2rem;
-      background: #8742f5;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .pin-form button:hover {
-      background: #6a31c2;
-    }
+    
 /* ==========================
    Navbar with background image
    ========================== */
@@ -220,7 +160,7 @@ img {
   left: 0;
   height: 3px;  /* thickness of progress bar */
   width: 0%;    /* start empty */
-  background-color: #8742f5; /* your purple */
+  background-color: #730594; /* your purple */
   transition: width 0.1s linear;
 }
 
@@ -252,7 +192,7 @@ img {
   width: 50px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #8742f5;
+  border: 2px solid #730594;
   box-shadow: 0 1px 4px rgba(135,66,245,0.10);
 }
 
@@ -265,7 +205,7 @@ img {
 }
 
 .navbar-menu li a {
-  color: #000000;
+  color: #730594;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
@@ -275,9 +215,9 @@ img {
 }
 
 .navbar-menu li:hover {
-  border-bottom: 2px solid#8742f5;
-  border-left: 2px solid#8742f5;
-  color: #8742f5;
+  border-bottom: 2px solid#730594;
+  border-left: 2px solid#730594;
+  color: #730594;
 }
 
 
@@ -286,11 +226,11 @@ img {
   background: none;
   border: none;
   font-size: 2rem;
-  color: #9f26e6;
+  color: #730594;
   cursor: pointer;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .navbar-toggle {
     display: block;
   }
@@ -307,6 +247,12 @@ img {
   }
   .navbar-menu.active {
     display: flex;
+  }
+  .nav-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    display: none;
   }
   
 }
@@ -389,7 +335,7 @@ img {
 }
 
 .btn-gallery {
-  background-color: #8742f5;
+  background-color: #730594;
   color: #fff;
   padding: 0.7rem 1.5rem;
   text-decoration: none;
@@ -400,7 +346,7 @@ img {
 
 .btn-gallery:hover {
   background-color: #d3d3f0;
-  color:#c300ff;
+  color:#730594;
   border: 2px solid #ab7af5;
 }
 /* ==========================
@@ -424,7 +370,7 @@ img {
 
 .value-card,
 .card {
-  background: #fff;
+  background: #f5e3f2;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -446,14 +392,16 @@ img {
 /* Facilities Section */
 .facilities {
   padding: 60px 20px;
-  background: #eac7f8;
+  background-image: url('images/facilities-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .facilities .section-title {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 40px;
-  color: #333;
+  color: #ffffff;
 }
 
 .facility-item {
@@ -472,6 +420,7 @@ img {
   max-width: 500px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid #ffffff;
 }
 
 .facility-text {
@@ -486,14 +435,14 @@ img {
 }
   
 .facility-text h4{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #7700ff;
+  color: #dc86f1;
 }
 .facility-text p {
   font-size: 1.4rem;
   line-height: 1.6;
-  color: #555;
+  color: #ffffff;
 }
 
 /* Responsive */
@@ -513,7 +462,7 @@ img {
    Contact Section
    ========================== */
 .contact{
-   background-image: url('images/contact\ us\ bg.jpg');
+   background-image: url('images/footer-bg.jpg');
    background-size: cover;
    background-repeat: no-repeat;
 }
@@ -555,7 +504,7 @@ img {
    ========================== */
 .team-section {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f9f9ff, #eef1f5);
+  background: linear-gradient(135deg, #ffffff, #887c9c);
   text-align: center;
 }
 .team-title {
@@ -590,7 +539,7 @@ img {
   width: 100%;
   height: 220px;
   object-fit: cover;
-  border-bottom: 4px solid #8742f5;
+  border-bottom: 4px solid #ccb1e2;
   filter: brightness(0.9);
   transition: filter 0.3s ease;
 }
@@ -675,4 +624,4 @@ img {
 @keyframes splashTitleFade {
   0% { opacity: 0; transform: translateY(30px);}
   100% { opacity: 1; transform: translateY(0);}
-}
+} 

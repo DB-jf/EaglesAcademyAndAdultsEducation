@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eagles Academy - Student Portal</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex h-screen bg-gray-100">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-900 text-white flex flex-col">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">Eagles Academy</div>
+    <nav class="flex-1 p-4 space-y-4">
+      <button class="menu-btn w-full text-left px-4 py-2 hover:bg-blue-700 rounded" data-target="dashboard">📊 Dashboard</button>
+      <button class="menu-btn w-full text-left px-4 py-2 hover:bg-blue-700 rounded" data-target="results">📝 Results</button>
+      <button class="menu-btn w-full text-left px-4 py-2 hover:bg-blue-700 rounded" data-target="settings">⚙️ Settings</button>
+      <button class="w-full text-left px-4 py-2 hover:bg-red-600 rounded mt-10">🔒 Logout</button>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col">
+
+    <!-- Topbar -->
+    <header class="flex justify-between items-center bg-white px-6 py-4 shadow">
+      <h1 id="pageTitle" class="text-xl font-semibold">Dashboard</h1>
+      <div class="flex items-center space-x-4">
+        <button class="relative">
+          🔔
+          <span class="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full px-1">3</span>
+        </button>
+        <button class="text-red-600 font-bold">Logout</button>
+      </div>
+    </header>
+
+    <!-- Content Sections -->
+    <main class="p-6 overflow-y-auto">
+
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="content-section">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-lg font-bold mb-4">Subjects Overview</h2>
+            <canvas id="subjectsChart"></canvas>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-lg font-bold mb-4">Subjects</h2>
+            <ul class="list-disc ml-6 space-y-2">
+              <li>Mathematics</li>
+              <li>English Language</li>
+              <li>Science</li>
+              <li>Social Studies</li>
+              <li>ICT</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-white p-6 rounded-xl shadow">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold">Exam Performance</h2>
+            <select class="border px-3 py-2 rounded">
+              <option>First Term</option>
+              <option>Second Term</option>
+              <option>Third Term</option>
+            </select>
+          </div>
+          <p><strong>Position:</strong> 5th out of 120 students</p>
+        </div>
+      </section>
+
+      <!-- Results Section -->
+<section id="results" class="content-section hidden">
+    <div class="bg-white p-6 rounded-xl shadow">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-bold">Results</h2>
+        <!-- Filters -->
+        <div class="flex space-x-3">
+          <select id="yearFilter" class="border px-3 py-2 rounded">
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+          </select>
+          <select id="termFilter" class="border px-3 py-2 rounded">
+            <option value="first">First Term</option>
+            <option value="second">Second Term</option>
+            <option value="third">Third Term</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Results Table -->
+      <table class="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-blue-100">
+            <th class="border p-2 text-left">Subject</th>
+            <th class="border p-2 text-left">Marks</th>
+            <th class="border p-2 text-left">Grade</th>
+            <th class="border p-2 text-left">Teacher's Comment</th>
+          </tr>
+        </thead>
+        <tbody id="resultsTable">
+          <!-- Table rows will be injected here -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+
+      <!-- Settings Section -->
+      <section id="settings" class="content-section hidden">
+        <div class="bg-white p-6 rounded-xl shadow max-w-lg">
+          <h2 class="text-lg font-bold mb-4">Account Settings</h2>
+          <form class="space-y-4">
+            <div>
+              <label class="block font-medium">Username</label>
+              <input type="text" class="w-full border px-3 py-2 rounded" placeholder="Enter new username">
+            </div>
+            <div>
+              <label class="block font-medium">Email</label>
+              <input type="email" class="w-full border px-3 py-2 rounded" placeholder="Enter new email">
+            </div>
+            <div>
+              <label class="block font-medium">Password</label>
+              <input type="password" class="w-full border px-3 py-2 rounded" placeholder="Enter new password">
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Chart.js example
+    const ctx = document.getElementById('subjectsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Math', 'English', 'Science', 'Social Studies', 'ICT'],
+        datasets: [{
+          data: [85, 78, 92, 74, 88],
+          backgroundColor: ['#2563eb','#16a34a','#dc2626','#f59e0b','#9333ea']
+        }]
+      }
+    });
+
+    // Sidebar Navigation
+    const menuBtns = document.querySelectorAll(".menu-btn");
+    const sections = document.querySelectorAll(".content-section");
+    const pageTitle = document.getElementById("pageTitle");
+
+    menuBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.target;
+
+        // Hide all sections
+        sections.forEach(sec => sec.classList.add("hidden"));
+
+        // Show selected section
+        document.getElementById(target).classList.remove("hidden");
+
+        // Update page title
+        pageTitle.textContent = target.charAt(0).toUpperCase() + target.slice(1);
+      });
+    });
+    // Results Data<script>
+  // Sample Results Data
+  const resultsData = {
+    "2024": {
+      "first": [
+        { subject: "Mathematics", marks: 85, grade: "A", comment: "Excellent" },
+        { subject: "English", marks: 78, grade: "B+", comment: "Good progress" },
+        { subject: "Science", marks: 92, grade: "A+", comment: "Outstanding" }
+      ],
+      "second": [
+        { subject: "Mathematics", marks: 80, grade: "A-", comment: "Very Good" },
+        { subject: "English", marks: 75, grade: "B", comment: "Keep improving" },
+        { subject: "Science", marks: 88, grade: "A", comment: "Strong performance" }
+      ],
+      "third": [
+        { subject: "Mathematics", marks: 90, grade: "A+", comment: "Excellent again" },
+        { subject: "English", marks: 82, grade: "A-", comment: "Well done" },
+        { subject: "Science", marks: 95, grade: "A+", comment: "Top of the class" }
+      ]
+    },
+    "2023": {
+      "first": [
+        { subject: "Mathematics", marks: 70, grade: "B", comment: "Good effort" },
+        { subject: "English", marks: 65, grade: "C+", comment: "Needs more practice" }
+      ]
+    },
+    "2022": {
+      "second": [
+        { subject: "Mathematics", marks: 88, grade: "A", comment: "Well done" },
+        { subject: "English", marks: 74, grade: "B", comment: "Satisfactory" }
+      ]
+    }
+  };
+
+  const yearFilter = document.getElementById("yearFilter");
+  const termFilter = document.getElementById("termFilter");
+  const resultsTable = document.getElementById("resultsTable");
+
+  function renderResults() {
+    const year = yearFilter.value;
+    const term = termFilter.value;
+    const data = resultsData[year]?.[term] || [];
+
+    resultsTable.innerHTML = "";
+
+    if (data.length === 0) {
+      resultsTable.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-gray-500">No results available</td></tr>`;
+      return;
+    }
+
+    data.forEach(res => {
+      resultsTable.innerHTML += `
+        <tr>
+          <td class="border p-2">${res.subject}</td>
+          <td class="border p-2">${res.marks}</td>
+          <td class="border p-2">${res.grade}</td>
+          <td class="border p-2">${res.comment}</td>
+        </tr>
+      `;
+    });
+  }
+
+  // Initial render
+  renderResults();
+
+  // Update on filter change
+  yearFilter.addEventListener("change", renderResults);
+  termFilter.addEventListener("change", renderResults);
+</script>
+
+  </script>
+</body>
+</html>

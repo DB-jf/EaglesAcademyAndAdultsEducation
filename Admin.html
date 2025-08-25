@@ -1,529 +1,251 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eagles Admin Dashboard</title>
-  <link rel="icon" href="images/EAGLES LOGO.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="Admin.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Eagles Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-
-  <!-- Splash screen -->
-  <div id="splash-screen" aria-hidden="false">
-    <img src="images/EAGLES LOGO.jpg" alt="Eagles Academy Logo" class="splash-logo">
-    <h1 class="splash-title">Eagles Admin</h1>
-  </div>
+<body class="flex h-screen bg-gray-100">
 
   <!-- Sidebar -->
-  <aside class="sidebar" aria-label="Admin navigation">
-    <div class="sidebar-header">
-      <img src="images/EAGLES LOGO.jpg" alt="Logo" class="sidebar-logo">
-      <h2 class="sidebar-title">Admin</h2>
-    </div>
-
-    <nav class="side-nav">
-      <ul>
-        <li class="active"><a href="#" data-target="dashboard">📊 Dashboard</a></li>
-        <li><a href="#" data-target="applications">📑 Applications</a></li>
-        <li><a href="#" data-target="sms">✉️ SMS Center</a></li>
-        <li><a href="#" data-target="settings">⚙️ Settings</a></li>
-        <li class="logout"><a href="#" id="logoutBtn">🚪 Logout</a></li>
-      </ul>
+  <aside class="w-64 bg-blue-900 text-white flex flex-col">
+    <div class="p-6 text-2xl font-bold border-b border-blue-700">Admin Panel</div>
+    <nav class="flex-1 p-4 space-y-4">
+      <button onclick="showPage('dashboard')" class="w-full text-left px-4 py-2 hover:bg-blue-700 rounded">🏠 Dashboard</button>
+      <button onclick="showPage('applications')" class="w-full text-left px-4 py-2 hover:bg-blue-700 rounded">📋 Applications</button>
+      <button onclick="showPage('sms')" class="w-full text-left px-4 py-2 hover:bg-blue-700 rounded">📩 SMS Center</button>
+      <button onclick="showPage('settings')" class="w-full text-left px-4 py-2 hover:bg-blue-700 rounded">⚙️ Settings</button>
+      <button class="w-full text-left px-4 py-2 hover:bg-red-600 rounded mt-10">🔒 Logout</button>
     </nav>
   </aside>
 
-  <!-- Main -->
-  <main class="main">
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col">
+
     <!-- Topbar -->
-    <header class="topbar">
-      <h1 id="viewTitle">Dashboard</h1>
-      <div class="profile">
-        <img id="profileAvatar" src="images/admin-avatar.jpg" alt="Admin avatar">
-        <span id="adminName">Administrator</span>
+    <header class="flex justify-between items-center bg-white px-6 py-4 shadow">
+      <h1 class="text-xl font-semibold">Admin Dashboard</h1>
+      <div class="flex items-center space-x-4">
+        <button class="relative">
+          🔔
+          <span class="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full px-1">5</span>
+        </button>
+        <button class="text-red-600 font-bold">Logout</button>
       </div>
     </header>
 
-    <!-- Views -->
-    <!-- DASHBOARD -->
-    <section class="view active" id="view-dashboard" data-view="dashboard">
-      <div class="cards">
-        <div class="card animated-card">
-          <h3>Total Applications</h3>
-          <p class="stat" id="stat-total">0</p>
-        </div>
-        <div class="card animated-card">
-          <h3>Accepted</h3>
-          <p class="stat" id="stat-accepted">0</p>
-        </div>
-        <div class="card animated-card">
-          <h3>Pending</h3>
-          <p class="stat" id="stat-pending">0</p>
-        </div>
-        <div class="card animated-card">
-          <h3>Rejected</h3>
-          <p class="stat" id="stat-rejected">0</p>
-        </div>
-      </div>
+    <!-- Pages -->
+    <main class="p-6 overflow-y-auto flex-1">
 
-      <div class="panel">
-        <h2 class="panel-title">Recent Applications</h2>
-        <table class="table" id="recentTable">
-          <thead>
-            <tr>
-              <th>Name</th><th>Class</th><th>Status</th><th>Submitted</th>
-            </tr>
-          </thead>
-          <tbody><!-- filled by JS --></tbody>
-        </table>
-      </div>
-    </section>
+      <!-- Dashboard -->
+      <section id="dashboard" class="page">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Applications Chart -->
+          <div class="bg-white p-6 rounded-xl shadow flex justify-center">
+            <div class="w-2/3">
+              <h2 class="text-lg font-bold mb-4">Applications Overview</h2>
+              <canvas id="applicationsChart"></canvas>
+            </div>
+          </div>
 
-    <!-- APPLICATIONS -->
-    <section class="view" id="view-applications" data-view="applications">
-      <div class="panel">
-        <div class="panel-header">
-          <h2 class="panel-title">All Applications</h2>
-          <div class="filters">
-            <input type="text" id="searchInput" placeholder="Search by name or email…">
-            <select id="classFilter" aria-label="Filter by class">
-              <option value="All">All Classes</option>
-              <option value="Primary">Primary</option>
-              <option value="Secondary">Secondary</option>
-              <option value="Adult Education">Adult Education</option>
+          <!-- Stats -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-green-100 p-4 rounded-xl shadow">
+              <h3 class="text-lg font-semibold text-green-800">Applied</h3>
+              <p class="text-2xl font-bold">200</p>
+            </div>
+            <div class="bg-blue-100 p-4 rounded-xl shadow">
+              <h3 class="text-lg font-semibold text-blue-800">Accepted</h3>
+              <p class="text-2xl font-bold">120</p>
+            </div>
+            <div class="bg-yellow-100 p-4 rounded-xl shadow">
+              <h3 class="text-lg font-semibold text-yellow-800">Pending</h3>
+              <p class="text-2xl font-bold">50</p>
+            </div>
+            <div class="bg-red-100 p-4 rounded-xl shadow">
+              <h3 class="text-lg font-semibold text-red-800">Rejected</h3>
+              <p class="text-2xl font-bold">30</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Actions -->
+        <div class="bg-white p-6 rounded-xl shadow mt-6">
+          <h2 class="text-lg font-bold mb-4">Recent Actions</h2>
+          <ul class="divide-y divide-gray-200">
+            <li class="flex justify-between py-3">
+              <span>John Doe - Application</span>
+              <span class="px-3 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800">Pending</span>
+            </li>
+            <li class="flex justify-between py-3">
+              <span>Mary Smith - Application</span>
+              <span class="px-3 py-1 rounded-full text-xs bg-green-100 text-green-800">Accepted</span>
+            </li>
+            <li class="flex justify-between py-3">
+              <span>James Brown - Application</span>
+              <span class="px-3 py-1 rounded-full text-xs bg-red-100 text-red-800">Rejected</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Applications -->
+      <section id="applications" class="page hidden">
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-lg font-bold mb-4">Student Applications</h2>
+          <!-- Filters -->
+          <div class="mb-4 flex gap-2">
+            <select class="border rounded p-2">
+              <option>All</option>
+              <option>Accepted</option>
+              <option>Pending</option>
+              <option>Rejected</option>
             </select>
-            <select id="statusFilter" aria-label="Filter by status">
-              <option value="All">All Statuses</option>
-              <option value="Pending">Pending</option>
-              <option value="Accepted">Accepted</option>
-              <option value="Rejected">Rejected</option>
-            </select>
-            <button class="btn btn-outline" id="resetFilters">Reset</button>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
           </div>
+          <!-- Table -->
+          <table class="w-full text-left border">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-2 border">Name</th>
+                <th class="p-2 border">Class</th>
+                <th class="p-2 border">Status</th>
+                <th class="p-2 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border">John Doe</td>
+                <td class="p-2 border">Grade 10</td>
+                <td class="p-2 border">
+                  <select class="border rounded p-1">
+                    <option>Pending</option>
+                    <option>Accepted</option>
+                    <option>Rejected</option>
+                  </select>
+                </td>
+                <td class="p-2 border">
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">Mary Smith</td>
+                <td class="p-2 border">Grade 9</td>
+                <td class="p-2 border">
+                  <select class="border rounded p-1">
+                    <option>Accepted</option>
+                    <option>Pending</option>
+                    <option>Rejected</option>
+                  </select>
+                </td>
+                <td class="p-2 border">
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </section>
 
-        <table class="table" id="appsTable">
-          <thead>
-            <tr>
-              <th>Name</th><th>Email</th><th>Class</th><th>Status</th><th>Submitted</th><th>Actions</th>
-            </tr>
-          </thead>
-          <tbody><!-- filled by JS --></tbody>
-        </table>
-        <p class="muted" id="noResults" style="display:none;">No applications match your filters.</p>
-      </div>
-    </section>
-
-    <!-- SMS CENTER -->
-    <section class="view" id="view-sms" data-view="sms">
-      <div class="panel">
-        <h2 class="panel-title">SMS Center</h2>
-        <form id="smsForm" class="form-grid">
-          <div class="form-row">
-            <label for="smsAudience">Audience</label>
-            <select id="smsAudience">
-              <option value="accepted">Accepted Applicants</option>
-              <option value="pending">Pending Applicants</option>
-              <option value="all">All Applicants</option>
-              <option value="class">Specific Class…</option>
-            </select>
-          </div>
-
-          <div class="form-row" id="smsClassRow" style="display:none;">
-            <label for="smsClass">Class</label>
-            <select id="smsClass">
-              <option value="Primary">Primary</option>
-              <option value="Secondary">Secondary</option>
-              <option value="Adult Education">Adult Education</option>
-            </select>
-          </div>
-
-          <div class="form-row">
-            <label for="smsMessage">Message</label>
-            <textarea id="smsMessage" rows="5" placeholder="Type your message…"></textarea>
-          </div>
-
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Send SMS</button>
-            <span class="muted" id="smsHint">Simulated send — integrate your SMS API later.</span>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- SETTINGS -->
-    <section class="view" id="view-settings" data-view="settings">
-      <div class="grid-2">
-        <!-- Profile -->
-        <div class="panel">
-          <h2 class="panel-title">Profile</h2>
-          <div class="profile-card">
-            <img id="settingsAvatarPreview" class="avatar-lg" src="images/admin-avatar.jpg" alt="Profile preview">
+      <!-- SMS Center -->
+      <section id="sms" class="page hidden">
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-lg font-bold mb-4">SMS Center</h2>
+          <form class="space-y-4">
             <div>
-              <label class="btn btn-outline">
-                Upload Picture
-                <input type="file" id="avatarInput" accept="image/*" hidden>
-              </label>
-              <p class="muted">JPG/PNG. Saved locally for this demo.</p>
+              <label class="block mb-1">Recipient</label>
+              <select id="recipientType" onchange="toggleSmsOptions()" class="border rounded w-full p-2">
+                <option>Individual Student</option>
+                <option>All Students</option>
+                <option>By Class</option>
+                <option>By Enrollment Status</option>
+              </select>
             </div>
+            <!-- Conditional Dropdowns -->
+            <div id="classSelect" class="hidden">
+              <label class="block mb-1">Select Class</label>
+              <select class="border rounded w-full p-2">
+                <option>Grade 7</option>
+                <option>Grade 8</option>
+                <option>Grade 9</option>
+                <option>Grade 10</option>
+              </select>
+            </div>
+            <div id="statusSelect" class="hidden">
+              <label class="block mb-1">Select Status</label>
+              <select class="border rounded w-full p-2">
+                <option>Accepted</option>
+                <option>Pending</option>
+                <option>Rejected</option>
+              </select>
+            </div>
+            <div>
+              <label class="block mb-1">Message</label>
+              <textarea class="border rounded w-full p-2" rows="4"></textarea>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Send SMS</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section id="settings" class="page hidden">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Profile Card -->
+          <div class="bg-white p-6 rounded-xl shadow flex flex-col items-center">
+            <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden mb-4">
+              <img src="https://via.placeholder.com/100" alt="Profile" class="object-cover">
+            </div>
+            <input type="file" class="text-sm">
           </div>
-          <form id="profileForm" class="form-grid">
-            <div class="form-row">
-              <label for="displayName">Display Name</label>
-              <input type="text" id="displayName" placeholder="Administrator">
-            </div>
-            <div class="form-row">
-              <label for="emailAdmin">Email</label>
-              <input type="email" id="emailAdmin" placeholder="admin@example.com">
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Save Profile</button>
-              <span class="muted" id="profileSaved" style="display:none;">Saved!</span>
-            </div>
-          </form>
-        </div>
 
-        <!-- Change Password -->
-        <div class="panel">
-          <h2 class="panel-title">Change Password</h2>
-          <form id="passwordForm" class="form-grid">
-            <div class="form-row">
-              <label for="currentPw">Current Password</label>
-              <input type="password" id="currentPw" required>
-            </div>
-            <div class="form-row">
-              <label for="newPw">New Password</label>
-              <input type="password" id="newPw" minlength="6" required>
-            </div>
-            <div class="form-row">
-              <label for="confirmPw">Confirm Password</label>
-              <input type="password" id="confirmPw" minlength="6" required>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Update Password</button>
-              <span class="muted" id="pwSaved" style="display:none;">Password updated (demo only).</span>
-            </div>
-          </form>
+          <!-- Account Details -->
+          <div class="bg-white p-6 rounded-xl shadow space-y-4">
+            <h2 class="text-lg font-bold">Account Settings</h2>
+            <input type="text" class="border rounded w-full p-2" placeholder="Username">
+            <input type="email" class="border rounded w-full p-2" placeholder="Email">
+            <input type="password" class="border rounded w-full p-2" placeholder="New Password">
+            <button class="bg-green-600 text-white px-4 py-2 rounded">Save Changes</button>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- View Application Modal -->
-  <div class="modal" id="viewModal" aria-hidden="true">
-    <div class="modal-content">
-      <button class="modal-close" id="closeViewModal" aria-label="Close">&times;</button>
-      <h2 class="panel-title" id="modalTitle">Application</h2>
-      <div id="modalBody" class="modal-body"><!-- filled by JS --></div>
-      <div class="form-actions">
-        <button class="btn btn-primary" id="modalAccept">Accept</button>
-        <button class="btn btn-outline" id="modalReject">Reject</button>
-      </div>
-    </div>
+    </main>
   </div>
 
+  <!-- Chart Script -->
   <script>
-    // ------------------ Demo Data & Storage ------------------
-    const LS_KEYS = {
-      applicants: 'ea.applicants',
-      profile: 'ea.admin.profile',
-      avatar: 'ea.admin.avatar',
-      authed: 'ea.admin.authed'
-    };
-
-    const demoApplicants = [
-      {id:1, name:'Jane Doe', email:'jane@example.com', phone:'+233201111111', class:'Primary', status:'Accepted', submitted:'2025-08-15'},
-      {id:2, name:'John Smith', email:'john@example.com', phone:'+233202222222', class:'Secondary', status:'Pending', submitted:'2025-08-14'},
-      {id:3, name:'Alice Johnson', email:'alice@example.com', phone:'+233203333333', class:'Adult Education', status:'Rejected', submitted:'2025-08-13'},
-      {id:4, name:'Kofi Mensah', email:'kofi@domain.com', phone:'+233204444444', class:'Primary', status:'Pending', submitted:'2025-08-12'},
-      {id:5, name:'Akosua Owusu', email:'akosua@domain.com', phone:'+233205555555', class:'Secondary', status:'Accepted', submitted:'2025-08-11'},
-      {id:6, name:'Yaw Asare', email:'yaw@domain.com', phone:'+233206666666', class:'Adult Education', status:'Pending', submitted:'2025-08-10'}
-    ];
-
-    function loadApplicants() {
-      const raw = localStorage.getItem(LS_KEYS.applicants);
-      if (!raw) {
-        localStorage.setItem(LS_KEYS.applicants, JSON.stringify(demoApplicants));
-        return demoApplicants;
-      }
-      try { return JSON.parse(raw); } catch { return demoApplicants; }
-    }
-    function saveApplicants(data) {
-      localStorage.setItem(LS_KEYS.applicants, JSON.stringify(data));
-    }
-
-    // ------------------ Splash ------------------
-    window.addEventListener('load', () => {
-      const splash = document.getElementById('splash-screen');
-      splash.style.opacity = '0';
-      setTimeout(() => splash.style.display = 'none', 700);
-    });
-
-    // ------------------ SPA Navigation ------------------
-    const titleEl = document.getElementById('viewTitle');
-    const views = document.querySelectorAll('.view');
-    document.querySelectorAll('.side-nav a[data-target]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = link.getAttribute('data-target');
-
-        // active nav state
-        document.querySelectorAll('.side-nav li').forEach(li => li.classList.remove('active'));
-        link.parentElement.classList.add('active');
-
-        // switch views
-        views.forEach(v => v.classList.toggle('active', v.dataset.view === target));
-        titleEl.textContent = link.textContent.replace(/^[^A-Za-z]+/, '').trim();
-      });
-    });
-
-    // ------------------ Applicants UI ------------------
-    let applicants = loadApplicants();
-    const statEls = {
-      total: document.getElementById('stat-total'),
-      accepted: document.getElementById('stat-accepted'),
-      pending: document.getElementById('stat-pending'),
-      rejected: document.getElementById('stat-rejected')
-    };
-
-    const appsTableBody = document.querySelector('#appsTable tbody');
-    const recentTableBody = document.querySelector('#recentTable tbody');
-    const searchInput = document.getElementById('searchInput');
-    const classFilter = document.getElementById('classFilter');
-    const statusFilter = document.getElementById('statusFilter');
-    const resetFilters = document.getElementById('resetFilters');
-    const noResults = document.getElementById('noResults');
-
-    function renderStats() {
-      statEls.total.textContent = applicants.length;
-      statEls.accepted.textContent = applicants.filter(a => a.status === 'Accepted').length;
-      statEls.pending.textContent = applicants.filter(a => a.status === 'Pending').length;
-      statEls.rejected.textContent = applicants.filter(a => a.status === 'Rejected').length;
-    }
-
-    function renderRecent() {
-      const sorted = [...applicants].sort((a,b) => b.submitted.localeCompare(a.submitted)).slice(0,5);
-      recentTableBody.innerHTML = sorted.map(a => `
-        <tr>
-          <td>${a.name}</td>
-          <td>${a.class}</td>
-          <td><span class="status ${a.status.toLowerCase()}">${a.status}</span></td>
-          <td>${a.submitted}</td>
-        </tr>`).join('');
-    }
-
-    function matchesFilters(a) {
-      const q = searchInput.value.trim().toLowerCase();
-      const c = classFilter.value;
-      const s = statusFilter.value;
-      const qmatch = !q || a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q);
-      const cmatch = (c === 'All') || (a.class === c);
-      const smatch = (s === 'All') || (a.status === s);
-      return qmatch && cmatch && smatch;
-    }
-
-    function renderApps() {
-      const filtered = applicants.filter(matchesFilters);
-      appsTableBody.innerHTML = filtered.map(a => `
-        <tr>
-          <td>${a.name}</td>
-          <td>${a.email}</td>
-          <td>${a.class}</td>
-          <td><span class="status ${a.status.toLowerCase()}">${a.status}</span></td>
-          <td>${a.submitted}</td>
-          <td class="actions">
-            <button class="btn btn-xs view" data-id="${a.id}">View</button>
-            <button class="btn btn-xs accept" data-id="${a.id}">Accept</button>
-            <button class="btn btn-xs reject" data-id="${a.id}">Reject</button>
-            <button class="btn btn-xs sms" data-id="${a.id}">SMS</button>
-          </td>
-        </tr>`).join('');
-      noResults.style.display = filtered.length ? 'none' : 'block';
-    }
-
-    function updateAll() {
-      renderStats();
-      renderRecent();
-      renderApps();
-      saveApplicants(applicants);
-    }
-
-    // Filters
-    [searchInput, classFilter, statusFilter].forEach(el => el.addEventListener('input', renderApps));
-    resetFilters.addEventListener('click', () => {
-      searchInput.value = '';
-      classFilter.value = 'All';
-      statusFilter.value = 'All';
-      renderApps();
-    });
-
-    // Row actions (event delegation)
-    document.getElementById('appsTable').addEventListener('click', (e) => {
-      if (!(e.target instanceof HTMLElement)) return;
-      const btn = e.target.closest('button');
-      if (!btn) return;
-      const id = Number(btn.dataset.id);
-      const app = applicants.find(a => a.id === id);
-      if (!app) return;
-
-      if (btn.classList.contains('accept')) {
-        if (confirm(`Accept ${app.name}?`)) { app.status = 'Accepted'; updateAll(); }
-      } else if (btn.classList.contains('reject')) {
-        if (confirm(`Reject ${app.name}?`)) { app.status = 'Rejected'; updateAll(); }
-      } else if (btn.classList.contains('sms')) {
-        // jump to SMS view prefilled
-        document.querySelector('.side-nav a[data-target="sms"]').click();
-        document.getElementById('smsAudience').value = 'all';
-        document.getElementById('smsMessage').value = `Hello ${app.name}, this is Eagles Academy.`;
-      } else if (btn.classList.contains('view')) {
-        openViewModal(app);
+    const ctx = document.getElementById('applicationsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Applied', 'Accepted', 'Pending', 'Rejected'],
+        datasets: [{
+          data: [200, 120, 50, 30],
+          backgroundColor: ['#3b82f6', '#16a34a', '#facc15', '#dc2626'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
       }
     });
 
-    // Initial paint
-    updateAll();
-
-    // ------------------ View Modal ------------------
-    const viewModal = document.getElementById('viewModal');
-    const closeViewModalBtn = document.getElementById('closeViewModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const modalAccept = document.getElementById('modalAccept');
-    const modalReject = document.getElementById('modalReject');
-    let modalAppId = null;
-
-    function openViewModal(app) {
-      modalAppId = app.id;
-      modalTitle.textContent = `Application — ${app.name}`;
-      modalBody.innerHTML = `
-        <div class="kv"><span>Full Name:</span><b>${app.name}</b></div>
-        <div class="kv"><span>Email:</span><b>${app.email}</b></div>
-        <div class="kv"><span>Phone:</span><b>${app.phone}</b></div>
-        <div class="kv"><span>Class:</span><b>${app.class}</b></div>
-        <div class="kv"><span>Status:</span><b>${app.status}</b></div>
-        <div class="kv"><span>Submitted:</span><b>${app.submitted}</b></div>
-      `;
-      viewModal.classList.add('active');
-    }
-    function closeViewModal() {
-      viewModal.classList.remove('active');
-      modalAppId = null;
-    }
-    closeViewModalBtn.addEventListener('click', closeViewModal);
-    viewModal.addEventListener('click', (e) => { if (e.target === viewModal) closeViewModal(); });
-
-    modalAccept.addEventListener('click', () => {
-      const app = applicants.find(a => a.id === modalAppId);
-      if (app) { app.status = 'Accepted'; updateAll(); }
-      closeViewModal();
-    });
-    modalReject.addEventListener('click', () => {
-      const app = applicants.find(a => a.id === modalAppId);
-      if (app) { app.status = 'Rejected'; updateAll(); }
-      closeViewModal();
-    });
-
-    // ------------------ SMS Center ------------------
-    const smsAudience = document.getElementById('smsAudience');
-    const smsClassRow = document.getElementById('smsClassRow');
-    const smsClass = document.getElementById('smsClass');
-    const smsForm = document.getElementById('smsForm');
-    const smsMessage = document.getElementById('smsMessage');
-
-    smsAudience.addEventListener('change', () => {
-      smsClassRow.style.display = smsAudience.value === 'class' ? '' : 'none';
-    });
-
-    smsForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const audience = smsAudience.value;
-      const message = smsMessage.value.trim();
-      if (!message) { alert('Please enter a message.'); return; }
-
-      let recipients = applicants;
-      if (audience === 'accepted') recipients = applicants.filter(a => a.status === 'Accepted');
-      if (audience === 'pending') recipients = applicants.filter(a => a.status === 'Pending');
-      if (audience === 'class') recipients = applicants.filter(a => a.class === smsClass.value);
-
-      alert(`SMS queued to ${recipients.length} recipient(s).\n\n(Integrate your SMS API here.)`);
-      smsMessage.value = '';
-    });
-
-    // ------------------ Settings (profile + password) ------------------
-    const profileForm = document.getElementById('profileForm');
-    const displayName = document.getElementById('displayName');
-    const emailAdmin = document.getElementById('emailAdmin');
-    const profileSaved = document.getElementById('profileSaved');
-    const profileAvatar = document.getElementById('profileAvatar');
-    const avatarInput = document.getElementById('avatarInput');
-    const settingsAvatarPreview = document.getElementById('settingsAvatarPreview');
-
-    // Load saved profile/avatar
-    const savedProfile = JSON.parse(localStorage.getItem(LS_KEYS.profile) || '{}');
-    if (savedProfile.displayName) {
-      displayName.value = savedProfile.displayName;
-      document.getElementById('adminName').textContent = savedProfile.displayName;
-    }
-    if (savedProfile.email) emailAdmin.value = savedProfile.email;
-
-    const savedAvatar = localStorage.getItem(LS_KEYS.avatar);
-    if (savedAvatar) {
-      profileAvatar.src = savedAvatar; settingsAvatarPreview.src = savedAvatar;
+    // Switch pages
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
     }
 
-    profileForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = { displayName: displayName.value || 'Administrator', email: emailAdmin.value || '' };
-      localStorage.setItem(LS_KEYS.profile, JSON.stringify(data));
-      document.getElementById('adminName').textContent = data.displayName;
-      profileSaved.style.display = 'inline';
-      setTimeout(() => profileSaved.style.display = 'none', 1500);
-    });
-
-    avatarInput.addEventListener('change', (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const dataUrl = reader.result;
-        localStorage.setItem(LS_KEYS.avatar, dataUrl);
-        profileAvatar.src = dataUrl;
-        settingsAvatarPreview.src = dataUrl;
-      };
-      reader.readAsDataURL(file);
-    });
-
-    // Change Password (front-end only)
-    const passwordForm = document.getElementById('passwordForm');
-    const currentPw = document.getElementById('currentPw');
-    const newPw = document.getElementById('newPw');
-    const confirmPw = document.getElementById('confirmPw');
-    const pwSaved = document.getElementById('pwSaved');
-
-    passwordForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (newPw.value.length < 6) { alert('New password must be at least 6 characters.'); return; }
-      if (newPw.value !== confirmPw.value) { alert('New passwords do not match.'); return; }
-      // In production: verify currentPw server-side and update securely.
-      pwSaved.style.display = 'inline';
-      setTimeout(() => pwSaved.style.display = 'none', 1500);
-      currentPw.value = newPw.value = confirmPw.value = '';
-    });
-
-    // ------------------ Logout ------------------
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      localStorage.removeItem(LS_KEYS.authed);
-      // Redirect to your real login page when it exists
-      window.location.href = 'login.html'; // change to your login route
-    });
-
-    // (Optional) Gate: if you want to require a flag
-    // if (!localStorage.getItem(LS_KEYS.authed)) { window.location.href = 'login.html'; }
-
-    
+    // Toggle SMS options
+    function toggleSmsOptions() {
+      const type = document.getElementById('recipientType').value;
+      document.getElementById('classSelect').classList.toggle('hidden', type !== "By Class");
+      document.getElementById('statusSelect').classList.toggle('hidden', type !== "By Enrollment Status");
+    }
   </script>
+
 </body>
 </html>
