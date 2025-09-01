@@ -7,19 +7,120 @@
   <link rel="stylesheet" href="StyleSheet.css">
   <link rel="icon" type="image/jpeg" href="images/EAGLES LOGO.jpg">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .gallery-header { padding: 2rem; text-align: center; background: #f5f5f5; }
-    .gallery-header h1 { color: #8742f5; }
-    
-    .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
-    .filters input, .filters select { padding: 0.5rem 1rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
-
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 5px; max-width: 1200px; margin: auto; }
-
-    .gallery-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; transition: transform 0.3s; }
-    .gallery-grid img:hover { transform: scale(1.05); }
-
-    .no-results { text-align: center; color: #999; margin-top: 2rem; }
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f7fc;
+      color: #222;
+    }
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      padding: 0.5rem 0;
+    }
+    .navbar-logo-img {
+      height: 40px;
+      vertical-align: middle;
+    }
+    .navbar-logo {
+      font-weight: 700;
+      color: #8742f5;
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+    .gallery-header {
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+      background: #f5f5f5;
+    }
+    .gallery-header h1 {
+      color: #8742f5;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .search-bar-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0 1rem 0;
+    }
+    .search-bar {
+      width: 320px;
+      padding: 0.7rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #8742f5;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(135,66,245,0.07);
+      outline: none;
+      transition: border 0.2s;
+      color: #222;
+      background: #fff;
+    }
+    .search-bar:focus {
+      border: 2px solid #8742f5;
+      box-shadow: 0 2px 12px rgba(135,66,245,0.12);
+    }
+    .gallery-section {
+      margin: 2.5rem auto;
+      max-width: 1200px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(135,66,245,0.06);
+      padding: 2rem 1rem 1.5rem 1rem;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      color: #8742f5;
+      margin-bottom: 1.2rem;
+      text-align: left;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 1.2rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(135,66,245,0.07);
+      transition: transform 0.3s;
+      background: #eee;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 16px rgba(135,66,245,0.13);
+    }
+    .view-more-btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background: #8742f5;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(135,66,245,0.09);
+      transition: background 0.2s;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    .view-more-btn:hover {
+      background: #6b2edc;
+    }
+    .no-results {
+      text-align: center;
+      color: #8742f5;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -39,128 +140,117 @@
   <!-- Header -->
   <section class="gallery-header">
     <h1>Gallery</h1>
+    <p>Explore highlights from our classes, programmes, and activities.</p>
   </section>
 
-  <!-- Filters -->
-  <section class="filters">
-    <input type="text" id="searchBar" placeholder="Search images...">
-    
-    <select id="yearFilter">
-      <option value="">Select Year</option>
-      <option value="2023">2023</option>
-      <option value="2024">2024</option>
-      <option value="2025">2025</option>
-    </select>
+  <!-- Modern Search Bar -->
+  <div class="search-bar-container">
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search by keyword, event, or class...">
+  </div>
 
-    <select id="eventFilter">
-      <option value="">Select Event</option>
-      <option value="Graduation">Graduation</option>
-      <option value="Inter-sch Games">Inter-school Games</option>
-      <option value="Anniversary">Anniversary</option>
-      <option value="Graduation">Graduation</option>
-      <option value="Quiz Competition">Quiz Competition</option>
-    </select>
-
-    <select id="classFilter">
-      <option value="">Select Class</option>
-      <option value="Crech">Crech</option>
-      <option value="KG">KG</option>
-      <option value="Primary 1">Primary 1</option>
-      <option value="Primary 2">Primary 2</option>
-      <option value="Primary 3">Primary 3</option>
-      <option value="Primary 4">Primary 4</option>
-      <option value="Primary 5">Primary 5</option>
-      <option value="Primary 6">Primary 6</option>
-      <option value="JHS 1">JHS 1</option>
-      <option value="JHS 2">JHS 2</option>
-      <option value="JHS 3">JHS 3</option>
-    </select>
+  <!-- Gallery Sections -->
+  <section class="gallery-section" id="normal-class">
+    <h2 class="section-title">Normal Class Session</h2>
+    <div class="gallery-grid">
+      <img src="images/1.jpg" alt="Class Session - Primary 1">
+      <img src="images/2.jpg" alt="Class Session - JHS 2">
+      <img src="images/3.jpg" alt="Class Session - KG">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
   </section>
 
-  <!-- Gallery Grid -->
-  <section class="gallery-grid" id="galleryGrid">
-    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
-    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
-    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
-    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
-    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
-    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
-    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
-    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
-    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
-    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
-    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
-    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
-    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
-    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
-    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
-    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
-    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
-    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
-    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
-    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
-    <img src="images/1.jpg" alt="Graduation 2023" data-year="2023" data-event="Graduation" data-class="JHS 3">
-    <img src="images/2.jpg" alt="Inter-school Games 2024" data-year="2024" data-event="Inter-sch Games" data-class="Primary 5">
-    <img src="images/3.jpg" alt="Anniversary 2025" data-year="2025" data-event="Anniversary" data-class="KG">
-    <img src="images/4.jpg" alt="Graduation 2024" data-year="2024" data-event="Graduation" data-class="JHS 2">
-    <img src="images/5.jpg" alt="Quiz Competition 2023" data-year="2023" data-event="Quiz Competition" data-class="Primary 3">
-    <!-- Add more images similarly -->
+  <section class="gallery-section" id="electronics-class">
+    <h2 class="section-title">Electronics Class / Practicals</h2>
+    <div class="gallery-grid">
+      <img src="images/4.jpg" alt="Electronics Practical - JHS 3">
+      <img src="images/5.jpg" alt="Electronics Class - Primary 6">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
   </section>
 
-  <p class="no-results" id="noResults" style="display:none;">No images found.</p>
+  <section class="gallery-section" id="cadet-practice">
+    <h2 class="section-title">Cadet Practice / Programmes</h2>
+    <div class="gallery-grid">
+      <img src="images/library.jpg" alt="Cadet Practice">
+      <img src="images/boarding.jpg" alt="Cadet Programme">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
+  </section>
 
-<script>
-const gallery = document.getElementById('galleryGrid');
-const searchBar = document.getElementById('searchBar');
-const yearFilter = document.getElementById('yearFilter');
-const eventFilter = document.getElementById('eventFilter');
-const classFilter = document.getElementById('classFilter');
-const noResults = document.getElementById('noResults');
+  <section class="gallery-section" id="cultural-performance">
+    <h2 class="section-title">Cultural Performance</h2>
+    <div class="gallery-grid">
+      <img src="images/3.jpg" alt="Cultural Dance">
+      <img src="images/sport.jpg" alt="Cultural Event">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
+  </section>
 
-// Randomize images on page load
-function shuffleImages() {
-  const images = Array.from(gallery.querySelectorAll('img'));
-  for (let i = images.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    gallery.appendChild(images[j]);
-    images.splice(j, 1);
-  }
-}
+  <section class="gallery-section" id="instrument-lessons">
+    <h2 class="section-title">Instrument Lessons</h2>
+    <div class="gallery-grid">
+      <img src="images/2.jpg" alt="Instrument Lesson - Piano">
+      <img src="images/1.jpg" alt="Instrument Lesson - Drums">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
+  </section>
 
-window.addEventListener('load', () => {
-  shuffleImages();
-  filterGallery();
-});
+  <section class="gallery-section" id="computing-lessons">
+    <h2 class="section-title">Computing Lessons</h2>
+    <div class="gallery-grid">
+      <img src="images/computer-lab.jpg" alt="Computing Lesson - JHS 1">
+      <img src="images/4.jpg" alt="Computing Practical">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
+  </section>
 
-[yearFilter, eventFilter, classFilter, searchBar].forEach(el => {
-  el.addEventListener('input', filterGallery);
-});
+  <section class="gallery-section" id="playing-ground">
+    <h2 class="section-title">Playing Ground</h2>
+    <div class="gallery-grid">
+      <img src="images/sport.jpg" alt="Playing Ground - Football">
+      <img src="images/5.jpg" alt="Playing Ground - Recreation">
+      <!-- Add more images as needed -->
+    </div>
+    <a href="#" class="view-more-btn">View More</a>
+  </section>
 
-function filterGallery() {
-  const searchText = searchBar.value.toLowerCase();
-  const selectedYear = yearFilter.value;
-  const selectedEvent = eventFilter.value;
-  const selectedClass = classFilter.value;
+  <p class="no-results" id="noResults">No images found.</p>
 
-  let visibleCount = 0;
+  <script>
+    // Simple search for all sections
+    const searchBar = document.getElementById('searchBar');
+    const gallerySections = document.querySelectorAll('.gallery-section');
+    const noResults = document.getElementById('noResults');
 
-  gallery.querySelectorAll('img').forEach(img => {
-    const matchesSearch = img.alt.toLowerCase().includes(searchText);
-    const matchesYear = !selectedYear || img.dataset.year === selectedYear;
-    const matchesEvent = !selectedEvent || img.dataset.event === selectedEvent;
-    const matchesClass = !selectedClass || img.dataset.class === selectedClass;
+    searchBar.addEventListener('input', function () {
+      const query = this.value.trim().toLowerCase();
+      let anyVisible = false;
 
-    if(matchesSearch && matchesYear && matchesEvent && matchesClass){
-      img.style.display = 'block';
-      visibleCount++;
-    } else {
-      img.style.display = 'none';
-    }
-  });
+      gallerySections.forEach(section => {
+        let sectionVisible = false;
+        const images = section.querySelectorAll('img');
+        images.forEach(img => {
+          if (
+            img.alt.toLowerCase().includes(query)
+          ) {
+            img.style.display = 'block';
+            sectionVisible = true;
+          } else {
+            img.style.display = 'none';
+          }
+        });
+        section.style.display = sectionVisible ? 'block' : 'none';
+        if (sectionVisible) anyVisible = true;
+      });
 
-  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-}
-</script>
-
+      noResults.style.display = anyVisible ? 'none' : 'block';
+    });
+  </script>
 </body>
 </html>
