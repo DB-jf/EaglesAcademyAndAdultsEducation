@@ -18,7 +18,7 @@
     </div>
 
     <!-- Login Form -->
-    <form action="student-dashboard.html" method="POST" class="space-y-4">
+    <form id="loginForm" method="POST" class="space-y-4">
       <div>
         <label for="username" class="block text-gray-700 font-medium mb-1">Username/Student ID</label>
         <input type="text" id="username" name="username" required
@@ -44,6 +44,7 @@
         Sign In
       </button>
     </form>
+    <div id="loginMsg" class="mt-4 text-center text-red-600"></div>
 
     <!-- Footer -->
     <p class="mt-6 text-center text-gray-500 text-sm">
@@ -51,5 +52,23 @@
     </p>
   </div>
 
+  <script>
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('backend/login.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        if (data === 'success') {
+          window.location.href = 'student-dashboard.html'; // or admin-dashboard.html based on role
+        } else {
+          document.getElementById('loginMsg').textContent = 'Invalid login. Please try again.';
+        }
+      });
+    };
+  </script>
 </body>
 </html>

@@ -223,6 +223,12 @@ img {
   transition: background 0.2s, color 0.2s;
 }
 
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+  color: #000;
+  background: #f6dcfd; /* or your hover background */
+}
+
 .navbar-menu li:hover {
   border-bottom: 2px solid#730594;
   border-left: 2px solid#730594;
@@ -633,4 +639,4 @@ img {
 @keyframes splashTitleFade {
   0% { opacity: 0; transform: translateY(30px);}
   100% { opacity: 1; transform: translateY(0);}
-} 
+}

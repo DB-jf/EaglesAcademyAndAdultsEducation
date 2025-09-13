@@ -26,7 +26,7 @@
     <div class="step">3</div>
   </div>
 
-  <form id="multiStepForm">
+  <form id="multiStepForm" enctype="multipart/form-data" method="POST">
     <!-- Step 1: Student Information -->
     <div class="form-step active">
       <fieldset>
@@ -148,7 +148,6 @@ function showStep(n) {
 
 function nextPrev(n) {
   let steps = document.getElementsByClassName("form-step");
-  // Validate before going next
   if (n === 1) {
     let inputs = steps[currentStep].querySelectorAll("input, select, textarea");
     for (let input of inputs) {
@@ -158,16 +157,26 @@ function nextPrev(n) {
       }
     }
   }
-
   steps[currentStep].classList.remove("active");
   currentStep += n;
-
   if (currentStep >= steps.length) {
-    document.getElementById("multiStepForm").submit();
+    // AJAX submit
+    const form = document.getElementById("multiStepForm");
+    const formData = new FormData(form);
+    fetch('backend/enroll_submit.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+      alert(data === 'success' ? 'Application submitted!' : 'Submission failed.');
+      if (data === 'success') form.reset();
+    });
     return;
   }
   showStep(currentStep);
 }
+
 function updateProgressBar(n) {
   let progressSteps = document.querySelectorAll(".progress-bar .step");
   progressSteps.forEach((step, index) => {
